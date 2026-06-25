@@ -1,0 +1,10 @@
+{
+  "name": "sessions",
+  "type": "module",
+  "exports": {
+    "./server": "./sessions.ts"
+  },
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.0.0"
+  }
+}

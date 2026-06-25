@@ -1,0 +1,9 @@
+target/
+.DS_Store
+.local/
+supabase/.temp/
+*.swp
+*.swo
+.idea/
+.vscode/
+infra/supabase/.env.local

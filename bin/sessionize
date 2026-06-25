@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# sessionize - wrap any command with sessions notify for turn tracking
+# Usage: sessionize [--agent AGENT] <command> [args...]
+# Example: sessionize opencode "refactor auth module"
+
+set -euo pipefail
+
+AGENT=""
+if [[ "${1:-}" == "--agent" ]]; then
+    AGENT="${2:-}"
+    shift 2
+fi
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: sessionize [--agent AGENT] <command> [args...]" >&2
+    exit 1
+fi
+
+SESSIONS_BIN="${SESSIONS_BIN:-sessions}"
+
+# Pass the task description (excluding the binary) as the prompt, so the
+# sidebar shows a clear title like "opencode · refactor auth module".
+if [[ $# -gt 1 ]]; then
+  echo "${*:2}" | "$SESSIONS_BIN" notify --event session_start --stdin
+else
+  "$SESSIONS_BIN" notify --event session_start
+fi
+
+# Run the actual command
+"$@"
+EXIT_CODE=$?
+
+# Fire turn_complete after command exits
+"$SESSIONS_BIN" notify --event turn_complete
+
+exit $EXIT_CODE

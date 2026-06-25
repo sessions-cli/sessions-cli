@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "sessions-heartbeat",
+  "type": "object",
+  "required": ["install_id", "version", "os", "arch", "channel", "telemetry_level"],
+  "additionalProperties": false,
+  "properties": {
+    "install_id": { "type": "string", "format": "uuid" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+" },
+    "os": { "enum": ["darwin", "linux"] },
+    "arch": { "enum": ["aarch64", "x86_64"] },
+    "channel": { "enum": ["stable", "beta"] },
+    "telemetry_level": { "enum": ["updates_only", "full"] },
+    "period_hours": { "type": "integer", "minimum": 1, "maximum": 48 },
+    "rollup": { "$ref": "#/$defs/rollup" }
+  },
+  "$defs": {
+    "feature_count": {
+      "type": "object",
+      "required": ["feature", "source", "count"],
+      "additionalProperties": false,
+      "properties": {
+        "feature": { "type": "string" },
+        "source": { "enum": ["keyboard", "mouse", "cli"] },
+        "count": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "rollup": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hook_outcomes": { "type": "object" },
+        "session_count": { "type": "integer" },
+        "sessions_created": { "type": "integer" },
+        "refresh_p95_us": { "type": "integer" },
+        "hook_apply_p95_us": { "type": "integer" },
+        "daemon_uptime_s": { "type": "integer" },
+        "engagement": { "type": "object" },
+        "agents_installed": { "type": "array", "items": { "type": "string" } },
+        "feature_counts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/feature_count" }
+        }
+      }
+    }
+  }
+}
