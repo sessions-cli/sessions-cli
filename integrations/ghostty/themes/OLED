@@ -1,0 +1,23 @@
+# OLED monochrome — matches sessions sidebar TEXT_SELECTED (#dfdfdf).
+palette = 0=#000000
+palette = 1=#6e6e6e
+palette = 2=#999999
+palette = 3=#b0b0b0
+palette = 4=#b0b0b0
+palette = 5=#999999
+palette = 6=#b0b0b0
+palette = 7=#dfdfdf
+palette = 8=#6e6e6e
+palette = 9=#999999
+palette = 10=#b0b0b0
+palette = 11=#dfdfdf
+palette = 12=#b0b0b0
+palette = 13=#dfdfdf
+palette = 14=#dfdfdf
+palette = 15=#dfdfdf
+background = #000000
+foreground = #dfdfdf
+cursor-color = #dfdfdf
+cursor-text = #000000
+selection-background = #141414
+selection-foreground = #dfdfdf

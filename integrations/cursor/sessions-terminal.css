@@ -1,0 +1,44 @@
+/*
+ * sessions-cli — remove Cursor/VS Code integrated-terminal gutters.
+ *
+ * Cursor hardcodes:
+ *   .monaco-workbench .xterm { padding-left: 20px }
+ *   .xterm-scrollable-element { margin-left: -20px; padding-left: 20px }
+ * That empty strip is the black "bar" on the left (filled by our OSC 11
+ * black backdrop). Ghostty has no equivalent padding.
+ *
+ * Pair with sessions-terminal.js (hybrid right-click: workspace → IDE menu,
+ * sidebar → sessions pass-through).
+ *
+ * Loaded via "Custom CSS and JS Loader" (Cursor marketplace:
+ * s-h-a-d-o-w.vscode-custom-css). setup-cursor.sh installs this file and
+ * points vscode_custom_css.imports at it. Then run:
+ *   Command Palette → "Enable Custom CSS and JS" → reload window
+ */
+
+/* Kill the fixed left gutter around the terminal grid. */
+.monaco-workbench .xterm {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.monaco-workbench .xterm .xterm-scrollable-element {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Terminal editor + panel wrappers: no extra inset. */
+.monaco-workbench .pane-body.integrated-terminal .terminal-wrapper,
+.monaco-workbench .terminal-editor .terminal-wrapper,
+.monaco-workbench .pane-body.integrated-terminal .terminal-outer-container,
+.monaco-workbench .terminal-editor .terminal-outer-container {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Sticky-scroll strip can read as a top bar over sessions chrome. */
+.monaco-workbench .terminal-sticky-scroll {
+  display: none !important;
+}

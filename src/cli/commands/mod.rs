@@ -1,0 +1,9 @@
+pub mod agent;
+pub mod automation;
+pub mod bar;
+pub mod daemon;
+pub mod hooks;
+pub mod notify;
+pub mod opencode_question;
+pub mod session;
+pub mod skill;
